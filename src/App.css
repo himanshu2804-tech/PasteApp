@@ -1,0 +1,449 @@
+/* ============================================================
+   PASTE NOTES APP — Global Styles
+   Theme toggled via [data-theme="dark"] on <html>
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Mono:wght@400;500&display=swap');
+
+/* ---------- Light theme (default) ---------- */
+:root {
+  --yellow:        #fef08a;
+  --yellow-dark:   #ca8a04;
+  --yellow-mid:    #fde047;
+  --yellow-bg:     #fefce8;
+  --yellow-border: #fde68a;
+
+  --ink:           #1c1917;
+  --ink-soft:      #44403c;
+  --ink-muted:     #78716c;
+  --ink-faint:     #a8a29e;
+
+  --surface:       #fffbeb;
+  --surface-2:     #fef9c3;
+  --border:        #e7e5e4;
+
+  --textarea-bg:   #fffff8;
+  --preview-bg:    #fffff8;
+
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     16px;
+  --radius-xl:     22px;
+
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:     0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lift:   0 8px 24px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
+
+  --font-sans:     'Inter', system-ui, sans-serif;
+  --font-mono:     'Fira Mono', ui-monospace, monospace;
+
+  font-family: var(--font-sans);
+  color-scheme: light;
+}
+
+/* ---------- Dark theme — toggled by JS ---------- */
+[data-theme="dark"] {
+  --yellow-bg:     #1c1a0f;
+  --yellow-border: #3d3515;
+  --yellow-dark:   #fde047;
+  --yellow-mid:    #ca8a04;
+
+  --surface:       #1a1917;
+  --surface-2:     #211f14;
+  --border:        #2c2a27;
+
+  --ink:           #fafaf9;
+  --ink-soft:      #d6d3d1;
+  --ink-muted:     #a8a29e;
+  --ink-faint:     #57534e;
+
+  --textarea-bg:   #1a1912;
+  --preview-bg:    #1a1912;
+
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:     0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lift:   0 8px 24px rgba(0,0,0,0.6);
+
+  color-scheme: dark;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { transition: background 0.25s, color 0.25s; }
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(254,240,138,0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(253,224,71,0.12) 0%, transparent 50%);
+  background-attachment: fixed;
+  transition: background 0.25s, color 0.25s;
+}
+
+#root {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 1rem 3rem;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.flex.flex-row.gap-4 {
+  display: flex !important;
+  align-items: center;
+  gap: 0 !important;
+  padding: 0;
+  margin: 1.25rem 0 2rem;
+  background: var(--surface);
+  border: 1px solid var(--yellow-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.flex.flex-row.gap-4::before {
+  content: '📋 PasteNotes';
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--yellow-dark);
+  padding: 0 1.25rem;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.flex.flex-row.gap-4 a {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-left: 1px solid var(--yellow-border);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.flex.flex-row.gap-4 a:hover {
+  background: var(--yellow-bg);
+  color: var(--ink);
+}
+
+.flex.flex-row.gap-4 a.active {
+  background: var(--yellow-mid);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Theme toggle button ---------- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: 5px 8px;
+  font-size: 17px;
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border) !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+  padding: 0 !important;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  background: var(--yellow-mid);
+  transform: rotate(20deg) scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:active { transform: scale(0.92); }
+
+/* ============================================================
+   HOME PAGE — Create / Edit paste
+   ============================================================ */
+.flex.flex-row.gap-7 {
+  display: flex !important;
+  align-items: center;
+  gap: 12px !important;
+  margin-bottom: 0;
+}
+
+.flex.flex-row.gap-7 input[type='text'] {
+  flex: 1;
+  width: auto !important;
+  padding: 10px 16px !important;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--yellow-border) !important;
+  border-radius: var(--radius-md) !important;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.25s;
+  margin-top: 0 !important;
+}
+
+.flex.flex-row.gap-7 input[type='text']::placeholder { color: var(--ink-faint); }
+
+.flex.flex-row.gap-7 input[type='text']:focus {
+  border-color: var(--yellow-mid) !important;
+  box-shadow: 0 0 0 3px rgba(253,224,71,0.25);
+}
+
+.flex.flex-row.gap-7 button {
+  padding: 10px 22px !important;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--ink) !important;
+  background: var(--yellow-mid);
+  border: 1.5px solid var(--yellow-mid) !important;
+  border-radius: var(--radius-md) !important;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+.flex.flex-row.gap-7 button:hover {
+  background: #facc15;
+  box-shadow: var(--shadow-md);
+}
+
+.flex.flex-row.gap-7 button:active { transform: scale(0.97); }
+
+.mt-8 {
+  margin-top: 1rem !important;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  width: 100% !important;
+  min-width: unset !important;
+  padding: 18px 20px !important;
+  font-size: 15px;
+  font-family: var(--font-mono);
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--textarea-bg);
+  border: 1.5px solid var(--yellow-border) !important;
+  border-radius: var(--radius-lg) !important;
+  resize: vertical;
+  outline: none;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.25s, color 0.25s;
+  margin-top: 0 !important;
+}
+
+textarea::placeholder { color: var(--ink-faint); }
+
+textarea:focus {
+  border-color: var(--yellow-mid) !important;
+  box-shadow: 0 0 0 3px rgba(253,224,71,0.2), var(--shadow-md);
+}
+
+textarea[disabled] {
+  background: var(--surface-2);
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   PASTES PAGE — Search + List
+   ============================================================ */
+input[type='search'] {
+  display: block;
+  width: 100% !important;
+  min-width: unset !important;
+  padding: 11px 18px !important;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--yellow-border) !important;
+  border-radius: var(--radius-xl) !important;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.25s;
+  margin-bottom: 0.25rem;
+}
+
+input[type='search']::placeholder { color: var(--ink-faint); }
+
+input[type='search']:focus {
+  border-color: var(--yellow-mid) !important;
+  box-shadow: 0 0 0 3px rgba(253,224,71,0.25);
+}
+
+.flex.flex-col.gap-5 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  margin-top: 1.25rem !important;
+}
+
+.flex.flex-col.gap-5 > .border {
+  background: var(--surface);
+  border: 1.5px solid var(--yellow-border) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.18s, transform 0.15s, background 0.25s;
+  padding: 0;
+}
+
+.flex.flex-col.gap-5 > .border:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+.flex.flex-col.gap-5 > .border > div:first-child {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--yellow-border);
+  background: var(--surface-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.25s;
+}
+
+.flex.flex-col.gap-5 > .border > div:nth-child(2) {
+  font-size: 13.5px;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+  padding: 12px 18px;
+  line-height: 1.6;
+  max-height: 80px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  border-bottom: 1px solid var(--border);
+  background: var(--preview-bg);
+  white-space: pre-wrap;
+  word-break: break-word;
+  transition: background 0.25s, color 0.25s;
+}
+
+.flex.flex-row.gap-4.place-content-evenly {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0 !important;
+  justify-content: flex-start !important;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  transition: background 0.25s;
+}
+
+.flex.flex-row.gap-4.place-content-evenly button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--ink-muted);
+  background: transparent;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin: 3px;
+  transition: background 0.13s, color 0.13s, border-color 0.13s;
+}
+
+.flex.flex-row.gap-4.place-content-evenly button:hover {
+  background: var(--yellow-bg);
+  border-color: var(--yellow-border) !important;
+  color: var(--ink);
+}
+
+.flex.flex-row.gap-4.place-content-evenly button a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.flex.flex-row.gap-4.place-content-evenly button:nth-child(3) {
+  color: #dc2626;
+  border-color: #fee2e2 !important;
+}
+.flex.flex-row.gap-4.place-content-evenly button:nth-child(3):hover {
+  background: #fef2f2;
+  border-color: #fca5a5 !important;
+  color: #b91c1c;
+}
+
+.flex.flex-col.gap-5 > .border > div:last-child {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  padding: 7px 18px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   VIEW PASTE PAGE
+   ============================================================ */
+input[disabled] {
+  background: var(--surface-2) !important;
+  border-color: var(--border) !important;
+  color: var(--ink-soft);
+  cursor: default;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.place-content-between { justify-content: space-between !important; }
+
+.flex.flex-col.gap-5:empty::after {
+  content: '✏️  No pastes yet — create your first note!';
+  display: block;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+  padding: 3rem 1rem;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--yellow-border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--yellow-mid); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  .flex.flex-row.gap-7 { flex-wrap: wrap; }
+  .flex.flex-row.gap-7 input[type='text'] { width: 100% !important; }
+  .flex.flex-row.gap-7 button { width: 100%; justify-content: center; }
+}
